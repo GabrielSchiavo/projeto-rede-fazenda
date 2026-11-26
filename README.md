@@ -4,18 +4,23 @@ Projeto de rede para fazenda leiteira: cabeamento, VLANs e Wi-Fi. Desenvolvido n
 
 ## Sumário
 
-- [Visão geral](#visão-geral)
-- [Escopo e limitações](#escopo-e-limitações)
-- [Arquitetura](#arquitetura)
-- [VLANs e endereçamento](#vlans-e-endereçamento)
-- [Wi-Fi](#wi-fi)
-- [Validação em laboratório](#validação-em-laboratório)
-- [Orçamento](#orçamento)
-- [Pendências e correções](#pendências-e-correções)
-- [Conteúdo do repositório](#conteúdo-do-repositório)
-- [Como abrir os arquivos](#como-abrir-os-arquivos)
-- [Convenções](#convenções)
-- [Equipe](#equipe)
+- [Projeto de rede para fazenda leiteira](#projeto-de-rede-para-fazenda-leiteira)
+  - [Sumário](#sumário)
+  - [Visão geral](#visão-geral)
+  - [Escopo e limitações](#escopo-e-limitações)
+  - [Arquitetura](#arquitetura)
+  - [VLANs e endereçamento](#vlans-e-endereçamento)
+  - [Wi-Fi](#wi-fi)
+  - [Validação em laboratório](#validação-em-laboratório)
+  - [Orçamento](#orçamento)
+  - [Conteúdo do repositório](#conteúdo-do-repositório)
+    - [`diagramas/`](#diagramas)
+    - [`docs/`](#docs)
+    - [`planilhas/`](#planilhas)
+    - [`plantas/`](#plantas)
+    - [`simulacao/`](#simulacao)
+  - [Como abrir os arquivos](#como-abrir-os-arquivos)
+  - [Convenções](#convenções)
 
 ## Visão geral
 
@@ -44,8 +49,8 @@ A propriedade usada como referência é um **cenário criado pela equipe**: uma 
 
 ```mermaid
 flowchart LR
-    WAN[WAN<br/>fibra com IP fixo] --> ONU[ONU<br/>modo bridge]
-    ONU --> ROUTER[Roteador <br/> ER7206, NAT, DHCP, VLANs] --> FW[Firewall <br/> pfSense<br/>]
+    WAN[WAN<br/>] --> ONU[ONU<br/>modo bridge]
+    ONU --> FW[Firewall / Roteador<br/>pfSense: NAT, Gateway, DHCP, VLANs]
     FW --> CORE[SW-MDF<br/>switch núcleo]
     CORE --> G01[SW-IDF-G01<br/>Galpão 01]
     CORE --> G02[SW-IDF-G02<br/>Galpão 02]
@@ -56,7 +61,6 @@ flowchart LR
 
 - O **MDF** fica na área administrativa. Cada **IDF** atende uma edificação.
 - Os troncos levam as VLANs 10, 20, 30, 40, 50, 60 e 99, com a VLAN 999 como nativa.
-- A lista de materiais e a planilha de pontos de rede ainda incluem o roteador ER7206.
 - Os diagramas completos estão em `diagramas/`.
 
 ## VLANs e endereçamento
@@ -65,7 +69,7 @@ flowchart LR
 |---|---|---|---|
 | 10 | Administrativo | Escritório, gestão e impressoras | 10.73.10.0/24 |
 | 20 | Produção | Computadores e equipamentos da ordenha | 10.73.20.0/24 |
-| 30 | CFTV | Câmeras e gravador de vídeo | 10.73.30.0/24 |
+| 30 | CFTV | Câmeras IP (CFTV) | 10.73.30.0/24 |
 | 40 | Visitantes | Celulares e notebooks de visitantes, só internet | 10.73.40.0/24 |
 | 50 | Telemetria | Sensores e dispositivos IoT | 10.73.50.0/24 |
 | 60 | Servidores | NVR, armazenamento e serviços internos | 10.73.60.0/24 |
@@ -74,7 +78,7 @@ flowchart LR
 
 - O gateway de cada rede é o `.1`, e o domínio interno é `fazenda.lan`.
 - As faixas de DHCP, as reservas por MAC e a convenção de nomes estão em `planilhas/PIGI-102-109-125-137 - Plano Endereçamento IP-DHCP-WiFi.xlsx`.
-- A matriz de comunicação entre as VLANs (21 pares) e as justificativas estão em `planilhas/PIGI-101-103 - Plano de VLANs e Permissões.xlsx`.
+- A matriz de comunicação entre as VLANs (21 pares) e as justificativas estão em `planilhas/PIGI-101-103-105-106 - Plano de VLANs e Permissões.xlsx`.
 
 ## Wi-Fi
 
@@ -86,11 +90,11 @@ São 3 SSIDs:
 | Fazenda-Producao | 20 | Galpões, ordenha e depósito |
 | Fazenda-Visitantes | 40 | Todos os 10 APs, com isolamento entre clientes |
 
-O plano de canais e potência de cada AP e a cobertura estimada estão na planilha de endereçamento e em `plantas/PIGI-87_cobertura_wifi.png`.
+O plano de canais e potência de cada AP e a cobertura estimada estão na planilha de endereçamento e em `diagramas/PIGI-87 - Diagrama Cobertura Wifi.png`.
 
 ## Validação em laboratório
 
-O laboratório rodou no Packet Tracer (`simulacao/PIGI-64 Laboratorio.pkt`), com as regras de firewall aplicadas como ACLs no FW-01. Em 10/11/2026, os **34 testes** da matriz de alcance deram o resultado previsto: 21 pares de VLAN, 10 de sentido contrário e 3 extras.
+O laboratório rodou no Packet Tracer em duas etapas: `simulacao/PIGI-63 - Simulacao 01 VLANs e DHCP.pkt` (testes L1 a L4: VLANs, troncos, roteamento inter-VLAN e DHCP) e `simulacao/PIGI-64 - Simulacao 02 ACLs e Alcance.pkt` (teste L5, com as regras de firewall aplicadas como ACLs no FW-01). Em 10/11/2026, os **34 testes** da matriz de alcance deram o resultado previsto: 21 pares de VLAN, 10 de sentido contrário e 3 extras.
 
 | Teste | Resultado |
 |---|---|
@@ -102,11 +106,11 @@ O laboratório rodou no Packet Tracer (`simulacao/PIGI-64 Laboratorio.pkt`), com
 | L6 pfSense em VM (PIGI-65) | Não executado |
 | L7 nmap (PIGI-66) | Não executado |
 
-O Packet Tracer não gera SSH, SMB, Modbus, RTSP, MQTT nem SNMP. Essas regras estão nas ACLs, mas não foram exercitadas. As evidências estão nos seis prints de `simulacao/prints/` e em `docs/PIGI-69 - Evidencias e Correcoes.docx`.
+O Packet Tracer não gera SSH, SMB, Modbus, RTSP, MQTT nem SNMP. Essas regras estão nas ACLs, mas não foram exercitadas. As evidências estão nos prints de `simulacao/PIGI-63 - Prints/` (L1 a L4) e `simulacao/PIGI-64 - Prints/` (L5), e consolidadas em `docs/PIGI-69 - Evidencias e Correcoes.docx`.
 
 ## Orçamento
 
-A lista de materiais (`planilhas/PIGI-60 - Lista Materiais e Orçamento.xlsx`) tem **total estimado de R$ 58.083,77**, incluindo 10% de margem de contingência e instalação. Os preços são à vista, coletados entre setembro e outubro de 2026 nas lojas indicadas na própria planilha. Câmeras, NVR, servidor e sensores ainda não entram.
+A lista de materiais (`planilhas/PIGI-60 - Lista Materiais e Orçamento.xlsx`) tem **total estimado de R$ 58.539,01**, incluindo 10% de margem de contingência e instalação. Os preços são à vista, coletados entre setembro e outubro de 2026 nas lojas indicadas na própria planilha. Câmeras, NVR, servidor e sensores ainda não entram.
 
 ## Conteúdo do repositório
 
@@ -118,15 +122,18 @@ A lista de materiais (`planilhas/PIGI-60 - Lista Materiais e Orçamento.xlsx`) t
 ├── planilhas/
 ├── plantas/
 └── simulacao/
-    └── prints/
+    ├── PIGI-63 - Prints/
+    └── PIGI-64 - Prints/
 ```
 
 ### `diagramas/`
 
 | Arquivo | Tarefa | Conteúdo |
 |---|---|---|
-| `PIGI-100 - Diagrama Topologia Lógica Rede` (`.drawio` e `.png`) | PIGI-100 | Topologia lógica da rede |
-| `PIGI-112 - Diagrama Planta Infraestrutura Física Rede` (`.drawio` e `.png`) | PIGI-112 | Infraestrutura física sobre a planta |
+| `PIGI-63 - Diagrama Topologia Simulacao 01.png` | PIGI-63 | Topologia do laboratório no Packet Tracer |
+| `PIGI-87 - Diagrama Cobertura Wifi.png` | PIGI-87 | Cobertura Wi-Fi |
+| `PIGI-100 - Diagrama Topologia Lógica Rede` (`.drawio` e `.drawio.png`) | PIGI-100 | Topologia lógica da rede |
+| `PIGI-112 - Diagrama Planta Infraestrutura Física Rede` (`.drawio` e `.drawio.png`) | PIGI-112 | Infraestrutura física sobre a planta |
 
 ### `docs/`
 
@@ -142,7 +149,7 @@ A lista de materiais (`planilhas/PIGI-60 - Lista Materiais e Orçamento.xlsx`) t
 | Arquivo | Tarefas | Conteúdo |
 |---|---|---|
 | `PIGI 122 - Pontos de Rede.xlsx` | PIGI-122 | Pontos de rede, infraestrutura e ocupação dos switches |
-| `PIGI-101-103 - Plano de VLANs e Permissões.xlsx` | PIGI-101, 103 | VLANs, pares, permissões por porta e justificativas |
+| `PIGI-101-103-105-106 - Plano de VLANs e Permissões.xlsx` | PIGI-101, 103, 105, 106 | VLANs, pares, permissões por porta e justificativas |
 | `PIGI-102-109-125-137 - Plano Endereçamento IP-DHCP-WiFi.xlsx` | PIGI-102, 109, 125, 137 | Endereçamento, DHCP, SSIDs, canais e potência, reservas e nomes |
 | `PIGI-12-15-130-136 - Regras Firewall.xlsx` | PIGI-12, 15, 130, 136 | Matriz de regras de firewall |
 | `PIGI-60 - Lista Materiais e Orçamento.xlsx` | PIGI-60 | Lista de materiais e orçamento estimado |
@@ -151,17 +158,18 @@ A lista de materiais (`planilhas/PIGI-60 - Lista Materiais e Orçamento.xlsx`) t
 
 | Arquivo | Tarefa | Conteúdo |
 |---|---|---|
-| `PIGI-32 - planta-baixa-detalhada-v7.png` | PIGI-32 | Planta baixa detalhada |
-| `PIGI-32 - planta-baixa-simplificada.png` | PIGI-32 | Planta baixa simplificada |
-| `PIGI-32 - visao-satelite-planta-baixa.png` | PIGI-32 | Visão de satélite com a planta |
-| `PIGI-87_cobertura_wifi.png` | PIGI-87 | Cobertura Wi-Fi |
+| `PIGI-32 - Planta Baixa Detalhada.png` | PIGI-32 | Planta baixa detalhada |
+| `PIGI-32 - Planta Baixa Simplificada.png` | PIGI-32 | Planta baixa simplificada |
+| `PIGI-32 - Visao Satelite Planta Baixa.png` | PIGI-32 | Visão de satélite com a planta |
 
 ### `simulacao/`
 
-| Arquivo | Conteúdo |
-|---|---|
-| `PIGI-64 Laboratorio.pkt` | Laboratório do Packet Tracer |
-| `prints/PIGI-64 Print 1` a `Print 6` | Evidências: ACLs, ping bloqueado, HTTPS liberado e bloqueado, ping da gerência e servidor bloqueado |
+| Arquivo | Tarefa | Conteúdo |
+|---|---|---|
+| `PIGI-63 - Simulacao 01 VLANs e DHCP.pkt` | PIGI-63 | Laboratório do Packet Tracer — configuração base (L1 a L4) |
+| `PIGI-63 - Prints/` (`Print 01` a `Print 06`) | PIGI-63 | Evidências L1–L4: VLANs no MDF e IDF-G01, troncos, rotas no FW-01, ping e DHCP |
+| `PIGI-64 - Simulacao 02 ACLs e Alcance.pkt` | PIGI-64 | Laboratório do Packet Tracer — matriz de alcance com ACLs (L5) |
+| `PIGI-64 - Prints/` (`Print 01` a `Print 06`) | PIGI-64 | Evidências L5: ACLs, ping bloqueado, HTTPS liberado e bloqueado, ping da gerência e servidor bloqueado |
 
 ## Como abrir os arquivos
 
@@ -175,4 +183,4 @@ A lista de materiais (`planilhas/PIGI-60 - Lista Materiais e Orçamento.xlsx`) t
 ## Convenções
 
 - Todo arquivo começa com o código da tarefa: `PIGI-<número> - descrição`. Documentos que cobrem várias tarefas listam todos os números.
-- Cada arquivo fica na pasta do seu tipo: texto em `docs/`, tabelas em `planilhas/`, imagens da planta em `plantas/`.
+- Cada arquivo fica na pasta do seu tipo: diagramas em `diagramas/`, textos em `docs/`, tabelas em `planilhas/`, plantas em `plantas/` e arquivos da simulação em `simulacao/`.
