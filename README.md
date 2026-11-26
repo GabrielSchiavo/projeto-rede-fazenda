@@ -1,7 +1,6 @@
 # Projeto de rede para fazenda leiteira
 
-Projeto da infraestrutura de rede de uma fazenda de gado leiteiro: cabeamento e fibra óptica, Wi-Fi, VLANs, endereçamento, regras de firewall e laboratório de validação no Cisco Packet Tracer.
-
+Projeto de rede para fazenda leiteira: cabeamento, VLANs e Wi-Fi. Desenvolvido na disciplina Projeto Integrador: Gestão de Infraestrutura - Unijuí.
 
 ## Sumário
 
