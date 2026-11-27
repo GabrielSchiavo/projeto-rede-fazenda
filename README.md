@@ -2,6 +2,9 @@
 
 Projeto de rede para fazenda leiteira: cabeamento, VLANs e Wi-Fi. Desenvolvido na disciplina Projeto Integrador: Gestão de Infraestrutura - Unijuí.
 
+> [!WARNING]
+> **Aviso sobre as plantas do projeto:** todas as plantas usadas como base deste projeto (planta baixa detalhada, planta simplificada e visão de satélite) foram **geradas com auxílio de inteligência artificial**. Elas têm caráter apenas ilustrativo e acadêmico, podem conter erros e **não garantem exatidão de metragens, escalas, proporções ou dimensões reais**. Essas imprecisões podem ter se refletido nos diagramas e demais materiais produzidos a partir delas.
+
 ## Sumário
 
 - [Projeto de rede para fazenda leiteira](#projeto-de-rede-para-fazenda-leiteira)
@@ -110,7 +113,7 @@ O Packet Tracer não gera SSH, SMB, Modbus, RTSP, MQTT nem SNMP. Essas regras es
 
 ## Orçamento
 
-A lista de materiais (`planilhas/PIGI-60 - Lista Materiais e Orçamento.xlsx`) tem **total estimado de R$ 58.539,01**, incluindo 10% de margem de contingência e instalação. Os preços são à vista, coletados entre setembro e outubro de 2026 nas lojas indicadas na própria planilha. Câmeras, NVR, servidor e sensores ainda não entram.
+A lista de materiais (`planilhas/PIGI-60 - Materiais e Orçamento.xlsx`) tem **total estimado de R$ 47.624,36**, incluindo 10% de margem de contingência e instalação. Os preços são à vista, coletados entre setembro e outubro de 2026 nas lojas indicadas na própria planilha. Câmeras, NVR, servidor e sensores ainda não entram.
 
 ## Conteúdo do repositório
 
@@ -152,7 +155,7 @@ A lista de materiais (`planilhas/PIGI-60 - Lista Materiais e Orçamento.xlsx`) t
 | `PIGI-101-103-105-106 - Plano de VLANs e Permissões.xlsx` | PIGI-101, 103, 105, 106 | VLANs, pares, permissões por porta e justificativas |
 | `PIGI-102-109-125-137 - Plano Endereçamento IP-DHCP-WiFi.xlsx` | PIGI-102, 109, 125, 137 | Endereçamento, DHCP, SSIDs, canais e potência, reservas e nomes |
 | `PIGI-12-15-130-136 - Regras Firewall.xlsx` | PIGI-12, 15, 130, 136 | Matriz de regras de firewall |
-| `PIGI-60 - Lista Materiais e Orçamento.xlsx` | PIGI-60 | Lista de materiais e orçamento estimado |
+| `PIGI-60 - Materiais e Orçamento.xlsx` | PIGI-60 | Lista de materiais e orçamento estimado |
 
 ### `plantas/`
 
