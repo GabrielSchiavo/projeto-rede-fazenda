@@ -22,7 +22,7 @@ Projeto de rede para fazenda leiteira: cabeamento, VLANs e Wi-Fi. Desenvolvido n
     - [`entrega/`](#entrega)
     - [`planilhas/`](#planilhas)
     - [`plantas/`](#plantas)
-    - [`simulacao/`](#simulacao)
+    - [`laboratorios/`](#laboratorios)
   - [Como abrir os arquivos](#como-abrir-os-arquivos)
   - [Convenções](#convenções)
 
@@ -44,7 +44,7 @@ A propriedade usada como referência é um **cenário criado pela equipe**: uma 
 
 - A **planta baixa foi gerada com auxílio de inteligência artificial** e pode conter erros. Ela não reflete um projeto real.
 - A visita técnica à fazenda real ocorreu em 17/11/2026, só três semanas antes da conclusão. Todo o estudo usa os dados da fazenda de referência.
-- O desenho foi validado **apenas em simulação** (Cisco Packet Tracer).
+- O desenho foi validado **apenas em laboratório** (Cisco Packet Tracer).
 - Os preços são estimativas de referência, sem cotação formal.
 - O pfSense em máquina virtual (PIGI-65) e o teste com nmap (PIGI-66) ficaram fora do escopo.
 - As premissas estão numeradas de P1 a P7 em `docs/PIGI-26-27-95-99 - Perfil Propriedade e Premissas.docx`.
@@ -98,7 +98,7 @@ O plano de canais e potência de cada AP e a cobertura estimada estão na planil
 
 ## Validação em laboratório
 
-O laboratório rodou no Packet Tracer em duas etapas: `simulacao/PIGI-63 - Simulacao 01 VLANs e DHCP.pkt` (testes L1 a L4: VLANs, troncos, roteamento inter-VLAN e DHCP) e `simulacao/PIGI-64 - Simulacao 02 ACLs e Alcance.pkt` (teste L5, com as regras de firewall aplicadas como ACLs no FW-01). Em 10/11/2026, os **34 testes** da matriz de alcance deram o resultado previsto: 21 pares de VLAN, 10 de sentido contrário e 3 extras.
+O laboratório rodou no Packet Tracer em duas etapas: `laboratorios/PIGI-63 - Laboratório 01 VLANs e DHCP.pkt` (testes L1 a L4: VLANs, troncos, roteamento inter-VLAN e DHCP) e `laboratorios/PIGI-64 - Laboratório 02 ACLs e Alcance.pkt` (teste L5, com as regras de firewall aplicadas como ACLs no FW-01). Em 10/11/2026, os **34 testes** da matriz de alcance deram o resultado previsto: 21 pares de VLAN, 10 de sentido contrário e 3 extras.
 
 | Teste | Resultado |
 |---|---|
@@ -110,7 +110,7 @@ O laboratório rodou no Packet Tracer em duas etapas: `simulacao/PIGI-63 - Simul
 | L6 pfSense em VM (PIGI-65) | Não executado |
 | L7 nmap (PIGI-66) | Não executado |
 
-O Packet Tracer não gera SSH, SMB, Modbus, RTSP, MQTT nem SNMP. Essas regras estão nas ACLs, mas não foram exercitadas. As evidências estão nos prints de `simulacao/PIGI-63 - Prints/` (L1 a L4) e `simulacao/PIGI-64 - Prints/` (L5), e consolidadas em `docs/PIGI-69 - Evidencias e Correcoes.docx`.
+O Packet Tracer não gera SSH, SMB, Modbus, RTSP, MQTT nem SNMP. Essas regras estão nas ACLs, mas não foram exercitadas. As evidências estão nos prints de `laboratorios/PIGI-63 - Prints/` (L1 a L4) e `laboratorios/PIGI-64 - Prints/` (L5), e consolidadas em `docs/PIGI-69 - Evidencias e Correcoes.docx`.
 
 ## Orçamento
 
@@ -126,16 +126,16 @@ A lista de materiais (`planilhas/PIGI-60 - Materiais e Orçamento.xlsx`) tem **t
 ├── entrega/
 ├── planilhas/
 ├── plantas/
-└── simulacao/
-    ├── PIGI-63 - Prints/
-    └── PIGI-64 - Prints/
+└── laboratorios/
+    ├── PIGI-63 - Prints Laboratório 01/
+    └── PIGI-64 - Prints Laboratório 02/
 ```
 
 ### `diagramas/`
 
 | Arquivo | Tarefa | Conteúdo |
 |---|---|---|
-| `PIGI-63 - Diagrama Topologia Simulacao 01.png` | PIGI-63 | Topologia do laboratório no Packet Tracer |
+| `PIGI-63 - Diagrama Topologia Laboratório 01.png` | PIGI-63 | Topologia do laboratório no Packet Tracer |
 | `PIGI-87 - Diagrama Cobertura Wifi.png` | PIGI-87 | Cobertura Wi-Fi |
 | `PIGI-100 - Diagrama Topologia Lógica Rede` (`.drawio` e `.drawio.png`) | PIGI-100 | Topologia lógica da rede |
 | `PIGI-112 - Diagrama Planta Infraestrutura Física Rede` (`.drawio` e `.drawio.png`) | PIGI-112 | Infraestrutura física sobre a planta |
@@ -171,13 +171,13 @@ Arquivos finais de conclusão da disciplina, resumo expandido e apresentação e
 | `PIGI-32 - Planta Baixa Simplificada.png` | PIGI-32 | Planta baixa simplificada |
 | `PIGI-32 - Visao Satelite Planta Baixa.png` | PIGI-32 | Visão de satélite com a planta |
 
-### `simulacao/`
+### `laboratorios/`
 
 | Arquivo | Tarefa | Conteúdo |
 |---|---|---|
-| `PIGI-63 - Simulacao 01 VLANs e DHCP.pkt` | PIGI-63 | Laboratório do Packet Tracer — configuração base (L1 a L4) |
+| `PIGI-63 - Laboratório 01 VLANs e DHCP.pkt` | PIGI-63 | Laboratório do Packet Tracer — configuração base (L1 a L4) |
 | `PIGI-63 - Prints/` (`Print 01` a `Print 06`) | PIGI-63 | Evidências L1–L4: VLANs no MDF e IDF-G01, troncos, rotas no FW-01, ping e DHCP |
-| `PIGI-64 - Simulacao 02 ACLs e Alcance.pkt` | PIGI-64 | Laboratório do Packet Tracer — matriz de alcance com ACLs (L5) |
+| `PIGI-64 - Laboratório 02 ACLs e Alcance.pkt` | PIGI-64 | Laboratório do Packet Tracer — matriz de alcance com ACLs (L5) |
 | `PIGI-64 - Prints/` (`Print 01` a `Print 06`) | PIGI-64 | Evidências L5: ACLs, ping bloqueado, HTTPS liberado e bloqueado, ping da gerência e servidor bloqueado |
 
 ## Como abrir os arquivos
@@ -193,4 +193,4 @@ Arquivos finais de conclusão da disciplina, resumo expandido e apresentação e
 ## Convenções
 
 - Os artefatos técnicos começam com o código da tarefa: `PIGI-<número> - descrição`. Documentos que cobrem várias tarefas listam todos os números.
-- Cada arquivo fica na pasta do seu tipo: diagramas em `diagramas/`, textos técnicos em `docs/`, entregáveis finais (`.docx` e `.pptx`) em `entrega/`, tabelas em `planilhas/`, plantas em `plantas/` e arquivos da simulação em `simulacao/`.
+- Cada arquivo fica na pasta do seu tipo: diagramas em `diagramas/`, textos técnicos em `docs/`, entregáveis finais (`.docx` e `.pptx`) em `entrega/`, tabelas em `planilhas/`, plantas em `plantas/` e arquivos dos laboratórios em `laboratorios/`.
