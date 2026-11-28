@@ -113,7 +113,7 @@ O Packet Tracer não gera SSH, SMB, Modbus, RTSP, MQTT nem SNMP. Essas regras es
 
 ## Orçamento
 
-A lista de materiais (`planilhas/PIGI-60 - Materiais e Orçamento.xlsx`) tem **total estimado de R$ 47.624,36**, incluindo 10% de margem de contingência e instalação. Os preços são à vista, coletados entre setembro e outubro de 2026 nas lojas indicadas na própria planilha. Câmeras, NVR, servidor e sensores ainda não entram.
+A lista de materiais (`planilhas/PIGI-60 - Materiais e Orçamento.xlsx`) tem **total estimado de R$ 47.624,36**, incluindo 12% de margem de contingência e instalação. Os preços são à vista, coletados entre setembro e outubro de 2026 nas lojas indicadas na própria planilha. Câmeras, NVR, servidor e sensores ainda não entram.
 
 ## Conteúdo do repositório
 
