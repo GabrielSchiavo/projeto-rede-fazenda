@@ -19,6 +19,7 @@ Projeto de rede para fazenda leiteira: cabeamento, VLANs e Wi-Fi. Desenvolvido n
   - [Conteúdo do repositório](#conteúdo-do-repositório)
     - [`diagramas/`](#diagramas)
     - [`docs/`](#docs)
+    - [`entrega/`](#entrega)
     - [`planilhas/`](#planilhas)
     - [`plantas/`](#plantas)
     - [`simulacao/`](#simulacao)
@@ -122,6 +123,7 @@ A lista de materiais (`planilhas/PIGI-60 - Materiais e Orçamento.xlsx`) tem **t
 ├── README.md
 ├── diagramas/
 ├── docs/
+├── entrega/
 ├── planilhas/
 ├── plantas/
 └── simulacao/
@@ -146,6 +148,10 @@ A lista de materiais (`planilhas/PIGI-60 - Materiais e Orçamento.xlsx`) tem **t
 | `PIGI-63 - Equipamentos e Ligacoes.docx` | PIGI-63 | Equipamentos, cabos e ligações do laboratório |
 | `PIGI-64 - Matriz de Alcance VLANs.docx` | PIGI-64 | Teste de alcance entre as VLANs e ACLs aplicadas |
 | `PIGI-69 - Evidencias e Correcoes.docx` | PIGI-69 | Evidências do laboratório e correções para o relatório final |
+
+### `entrega/`
+
+Arquivos finais de conclusão da disciplina, resumo expandido e apresentação em slides.
 
 ### `planilhas/`
 
@@ -182,8 +188,9 @@ A lista de materiais (`planilhas/PIGI-60 - Materiais e Orçamento.xlsx`) tem **t
 | `.pkt` | Cisco Packet Tracer |
 | `.xlsx` | Excel, LibreOffice ou Google Planilhas |
 | `.docx` | Word, LibreOffice ou Google Docs |
+| `.pptx` | PowerPoint, LibreOffice Impress ou Google Apresentações |
 
 ## Convenções
 
-- Todo arquivo começa com o código da tarefa: `PIGI-<número> - descrição`. Documentos que cobrem várias tarefas listam todos os números.
-- Cada arquivo fica na pasta do seu tipo: diagramas em `diagramas/`, textos em `docs/`, tabelas em `planilhas/`, plantas em `plantas/` e arquivos da simulação em `simulacao/`.
+- Os artefatos técnicos começam com o código da tarefa: `PIGI-<número> - descrição`. Documentos que cobrem várias tarefas listam todos os números.
+- Cada arquivo fica na pasta do seu tipo: diagramas em `diagramas/`, textos técnicos em `docs/`, entregáveis finais (`.docx` e `.pptx`) em `entrega/`, tabelas em `planilhas/`, plantas em `plantas/` e arquivos da simulação em `simulacao/`.
